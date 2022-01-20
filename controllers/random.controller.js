@@ -4,7 +4,7 @@ exports.find = (req, res) => {
         res.status(400).send({ message: "Need 2 parameters." });
     } else {
         let nb = parseInt(req.params.number);
-        let list = req.params.list.split(";")
+        let list = req.params.list.split(",")
 
         if (isNaN(nb) || nb < 1) {
             res.status(400).send({message: "1st parameter needs to be a number, upper than 0."});

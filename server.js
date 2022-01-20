@@ -4,11 +4,26 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: ["*"]
+const allowedOrigins = [
+  'capacitor://localhost',
+  'ionic://localhost',
+  'http://localhost',
+  'http://localhost:8200',
+  'http://localhost:8100',
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origin not allowed by CORS'));
+    }
+  },
 };
 
-app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());

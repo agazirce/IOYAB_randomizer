@@ -14,11 +14,11 @@ exports.find = (req, res) => {
             let choices = []
             while (nb > 0) {
                 let new_choice_id = Math.floor(Math.random() * list.length);
-                console.log(new_choice_id)
                 choices.push(list[new_choice_id]);
                 list.splice(new_choice_id, 1);
                 nb--;
             }
+            console.log({choices: choices});
             res.send({choices: choices});
         }
     }
